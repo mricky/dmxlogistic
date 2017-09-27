@@ -1,0 +1,4 @@
+<div id="box-exportdata">
+<a href="javascript:window.print();"><img src="images/_print.png" border="0" /></a><br /><br />
+<a href="doc/laporanmasterdataunitexcel.php?query=<?php echo str_replace(" ","+",$query_data);?>&amp;area=<?php echo $_GET[cr_kel];?>&amp;cabang=<?php echo $_GET[cr_kel1];?>&amp;unit=<?php echo $_GET[cr_unit];?>&amp;tahun=<?php echo $_GET[tahun];?>&amp;decode_cr=<?php echo $_GET[cr_txt];?>&amp;files='LaporanMasterDataUnit'" title="Export Excel"><img src="images/_xls.png" border="0" /></a><br /><br /><a href="doc/laporanmasterdataunitdoc.php?query=<?php echo str_replace(" ","+",$query_data);?>&amp;files='LaporanMasterDataUnit'" title="Export Word"><img src="images/_word.png" border="0" /></a>
+</div>

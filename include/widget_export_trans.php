@@ -1,0 +1,4 @@
+<div id="box-exportdata">
+<a href="javascript:window.print();"><img src="images/_print.png" border="0" /></a><br /><br />
+<a href="doc/laporansewaexcel.php?query=<?php echo str_replace(" ","+",$query_data);?>&amp;query_korporate=<?php echo str_replace(" ","+",$query_korporate);?>&amp;files='LaporanHasilSewaKendaraan'" title="Export Excel"><img src="images/_xls.png" border="0" /></a><br /><br /><a href="doc/transaksipersediaandoc.php?query=<?php echo str_replace(" ","+",$query_data);?>&amp;query_korporate=<?php echo str_replace(" ","+",$query_korporate);?>&amp;files='LaporanHasilSewaKendaraan'" title="Export Word"><img src="images/_word.png" border="0" /></a>
+</div>

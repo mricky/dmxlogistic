@@ -1,0 +1,18 @@
+Inportan Modul Update
+1. Semua Modul disesuaikan dengan hak akses
+2. Transaksi Jurnal Penjualan, dan pengeluaran bo, berlaku untuk edit modifikasi jurnal otomatis pada saat save order retail
+3. Transaksi Jurnal Penerimaan uang di pembayaran kasir, inculde piutang. bedakan antara transfer dan cash
+4. Jurnal Kas Masuk dan Keluar 
+
+
+Noted 
+Baru ketauan tgl 21-Mei-201
+
+4 Juni 2014
+1. Modul Jurnal Pada transaksi retail, Jurnal Penjualan [ Jumlah Piutang = jumlah sewa + biaya ]
+   a. apakah ayat jurnal sudah benar ? 
+      -- jawaban pa agus --
+	  - pada saat pembayaran uang muka, jurnal piutang berubah, total piu dikurangi dengan jumlah bayar [ uang muka ]
+   b. saat ini posting general info order + jurnal pada gl_retailtrans, apakah perlu dipisah ke gl_rtrans untuk info general jurnal ?
+   c. saat ini modul edit untuk penjurnal blm dilakukan karena harus fik dlu di modul add srtail + jurnal
+   d. 

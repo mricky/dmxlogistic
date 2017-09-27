@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>WHMCS - Quotes</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/ui.all.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jqueryui.js"></script>
+<script type="text/javascript" src="js/adminmenu.js"></script>
+<script type="text/javascript" src="js/adminsearchbox.js"></script>
+<script>
+  $(document).ready(function(){
+     $("#shownotes").click(function () {
+        $("#mynotes").toggle("slow");
+        return false;
+    });
+    $("#savenotes").click(function () {
+        $("#mynotes").toggle("slow");
+        $.post("index.php", { action: "savenotes", notes: $("#mynotesbox").val() });
+    });
+    $("#intellisearchval").keyup(function () {
+        var intellisearchlength = $("#intellisearchval").val().length;
+        if (intellisearchlength>2) {
+        $.post("search.php", { intellisearch: "true", value: $("#intellisearchval").val() },
+          function(data){
+            $("#searchresults").html(data);
+            $("#searchresults").slideDown("slow");
+          });
+        }
+    });
+    $("#intellisearchcancel").click(function () {
+        $("#intellisearchval").val("");
+        $("#searchresults").slideUp("slow");
+    });
+    $(".datepick").datepicker({
+        dateFormat: "dd/mm/yy",
+        showOn: "button",
+        buttonImage: "images/showcalendar.gif",
+        buttonImageOnly: true,
+        showButtonPanel: true
+    });
+    $("#clienttypeexisting").click(function () {
+    $("#newclientform").slideUp("slow");
+});
+$("#clienttypenew").click(function () {
+    $("#newclientform").slideDown("slow");
+});
+$("#addproduct").change(function () {
+    if (this.options[this.selectedIndex].value) {
+        $("#add_desc").val(this.options[this.selectedIndex].text);
+        $.post("quotes.php", { action: "getprice", currency: 1, id: this.options[this.selectedIndex].value },
+        function(data){
+            $("#add_up").val(data);
+        });
+    }
+});
+$("textarea.expanding").autogrow({
+    minHeight: 16,
+    lineHeight: 14
+});
+  });
+  function doDelete(id) {
+if (confirm("Are you sure you want to delete this quote?")) {
+window.location='/admin/quotes.php?action=delete&id='+id;
+}}
+function doDeleteLine(id) {
+if (confirm("Are you sure you want to delete this line item?")) {
+window.location='/admin/quotes.php?action=deleteline&id=&lid='+id;
+}}
+</script>
+</head>
+<body>
+<div id="mynotes"><textarea id="mynotesbox" rows="15" cols="80">Welcome to the WHMCS Demo!  Feel free to explore the demo but keep in mind it resets automatically every few hours.</textarea><br /><input type="button" value="Save" id="savenotes" /></div>
+<div id="topnav">
+  <div id="welcome">Welcome Back <strong>Admin User</strong>&nbsp;&nbsp;- <a href="../" title="Client Area">Client Area</a> | <a href="#" id="shownotes" title="My Notes">My Notes</a> | <a href="myaccount.php" title="My Account">My Account</a> | <a href="logout.php" title="Logout">Logout</a></div>
+  <div id="date">Tuesday | 05 October 2010 | 23:50 PM</div>
+  <div class="clear"></div>
+</div>
+<div id="logo_container"><img class="banner" src="images/logo.gif" alt="WHMCS" width="400" height="115" border="0" />
+  <div id="intellisearch"><strong>Intelligent Search</strong><br />
+    <div style="padding-top: 5px;" align="center">
+      <input type="text" id="intellisearchval" />
+      <img src="images/icons/delete.png" alt="Cancel" width="16" height="16" class="absmiddle" id="intellisearchcancel" />
+    </div>
+    <div align="left" id="searchresults"></div>
+  </div>
+</div>
+<div id="navigation">
+  <ul>
+    <li class="navbutton" onmouseover="this.className='navbuttonover';dropdownmenu(this, event, menu1, '');" onmouseout="this.className='navbutton';delayhidemenu();" onclick="window.location='index.php'"><a href="index.php" title="Home">Home</a></li>
+    <li class="navbutton" onmouseover="this.className='navbuttonover';dropdownmenu(this, event, menu2, '');" onmouseout="this.className='navbutton';delayhidemenu();" onclick="window.location='clients.php'"><a href="clients.php" title="Clients">Clients</a></li>
+    <li class="navbutton" onmouseover="this.className='navbuttonover';dropdownmenu(this, event, menu3, '');" onmouseout="this.className='navbutton';delayhidemenu();" onclick="window.location='orders.php'"><a href="orders.php" title="Orders">Orders</a></li>
+    <li class="navbutton" onmouseover="this.className='navbuttonover';dropdownmenu(this, event, menu4, '');" onmouseout="this.className='navbutton';delayhidemenu();" onclick="window.location='transactions.php'"><a href="transactions.php" title="Billing">Billing</a></li>
+    <li class="navbutton" onmouseover="this.className='navbuttonover';dropdownmenu(this, event, menu5, '');" onmouseout="this.className='navbutton';delayhidemenu();" onclick="window.location='supportcenter.php'"><a href="supportcenter.php" title="Support">Support</a></li>
+    <li class="navbutton" onmouseover="this.className='navbuttonover';" onmouseout="this.className='navbutton';" onclick="window.location='reports.php'"><a href="reports.php" title="Reports">Reports</a></li>
+    <li class="navbutton" onmouseover="this.className='navbuttonover';dropdownmenu(this, event, menu7, '');" onmouseout="this.className='navbutton';delayhidemenu();">Utilities</li>
+    <li class="navbutton" onmouseover="this.className='navbuttonover';dropdownmenu(this, event, menu8, '');" onmouseout="this.className='navbutton';delayhidemenu();">Setup</li>
+    <li class="navbutton" onmouseover="this.className='navbuttonover';dropdownmenu(this, event, menu9, '');" onmouseout="this.className='navbutton';delayhidemenu();">Help</li>
+  </ul>
+</div>
+<div id="content_container">
+  <div id="left_side">
+
+
+<span class="header"><img src="images/transactions.png" class="absmiddle" width="16" height="16" /> Billing</span>
+<ul class="menu">
+    <li><a href="transactions.php">View Transactions List</a></li>
+    <li><a href="gatewaylog.php">View Gateway Log</a></li>
+    <li><a href="offlineccprocessing.php">Offline CC Processing</a></li>
+</ul>
+
+<span class="header"><img src="images/invoices.png" class="absmiddle" width="16" height="16" /> Invoices</span>
+<ul class="menu">
+    <li><a href="invoices.php">All Invoices</a></li>
+    <li><a href="invoices.php?status=Paid">Paid Invoices</a></li>
+    <li><a href="invoices.php?status=Unpaid">Unpaid Invoices</a></li>
+    <li><a href="invoices.php?status=Overdue">Overdue Invoices</a></li>
+    <li><a href="invoices.php?status=Cancelled">Cancelled Invoices</a></li>
+    <li><a href="invoices.php?status=Refunded">Refunded Invoices</a></li>
+    <li><a href="invoices.php?status=Collections">Collections Invoices</a></li>
+</ul>
+
+<span class="header"><img src="images/billableitems.png" class="absmiddle" width="16" height="16" /> Billable Items</span>
+<ul class="menu">
+    <li><a href="billableitems.php">All Items</a></li>
+    <li><a href="billableitems.php?status=Uninvoiced">Uninvoiced Items</a></li>
+    <li><a href="billableitems.php?status=Recurring">Recurring Items</a></li>
+    <li><a href="billableitems.php?action=manage">Add New</a></li>
+</ul>
+
+<span class="header"><img src="images/quotes.png" class="absmiddle" width="16" height="16" /> Quotes</span>
+<ul class="menu">
+    <li><a href="quotes.php">All Quotes</a></li>
+    <li><a href="quotes.php?validity=Valid">Valid Quotes</a></li>
+    <li><a href="quotes.php?validity=Expired">Expired Quotes</a></li>
+    <li><a href="quotes.php?action=manage">Create New Quote</a></li>
+</ul>
+
+
+
+<span class="plain_header">Quick Links</span>
+<div class="smallfont">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+    <tr>
+      <td><a href="orders.php?filter=true&amp;status=Pending">Pending Orders</a></td>
+      <td align="left" valign="middle">4</td>
+    </tr>
+    <tr>
+      <td><a href="clients.php?status=Active">Active Clients</a></td>
+      <td align="left" valign="middle">2</td>
+    </tr>
+    <tr>
+      <td><a href="clientshostinglist.php?status=Active">Active Services</a></td>
+      <td align="left" valign="middle">2</td>
+    </tr>
+    <tr>
+      <td><a href="clientsdomainlist.php?status=Active">Active Domains</a></td>
+      <td align="left" valign="middle">2</td>
+    </tr>
+    <tr>
+      <td><a href="invoices.php?status=Overdue">Overdue Invoices</a></td>
+      <td align="left" valign="middle">7</td>
+    </tr>
+    <tr>
+      <td><a href="supporttickets.php?view=active">Active Support Tickets</a></td>
+      <td align="left" valign="middle">2</td>
+    </tr>
+</table>
+</div>
+
+
+<br />
+
+<span class="plain_header">Advanced Search</span>
+<div class="smallfont">
+
+<form method="get" action="search.php">
+    <select name="type" id="searchtype" onchange="populate(this)">
+      <option value="clients">Clients </option>
+      <option value="orders">Orders </option>
+      <option value="services">Services </option>
+      <option value="domains">Domains </option>
+      <option value="invoices">Invoices </option>
+      <option value="tickets">Tickets </option>
+    </select>
+    <select name="field" id="searchfield">
+      <option>Client ID</option>
+      <option selected="selected">Client Name</option>
+      <option>Company Name</option>
+      <option>Email Address</option>
+      <option>Address 1</option>
+      <option>Address 2</option>
+      <option>City</option>
+      <option>State</option>
+      <option>Postcode</option>
+      <option>Country</option>
+      <option>Phone Number</option>
+      <option>CC Last Four</option>
+    </select>
+    <input type="text" name="q" style="width:100%;" />
+    <input type="submit" value="Search" class="button" />
+  </form>
+
+</div>
+
+<br />
+
+<span class="plain_header">Staff Online</span>
+<div class="smallfont">Admin</div>
+
+  </div>
+  <div id="content">
+    <h1>Quotes</h1>
+    <div id="content_padded">
+<form method="post" action="/admin/quotes.php">
+<input type="hidden" name="token" value="0da2d40dfa2dc53331ae200fe6b084f2ad0f63e5" />
+<input type="hidden" name="action" value="save" />
+
+<h2>General Information</h2>
+
+<table class="form" width="100%" border="0" cellspacing="2" cellpadding="3">
+<tr><td width="15%" class="fieldlabel">Subject</td><td class="fieldarea"><input type="text" name="subject" size="50" value=""></td><td width="15%" class="fieldlabel">Stage</td><td class="fieldarea"><select name="stage">
+<option>Draft</option>
+<option>Delivered</option>
+<option>On Hold</option>
+<option>Accepted</option>
+<option>Lost</option>
+<option>Dead</option>
+</select></td></tr>
+<tr><td class="fieldlabel">Date Created</td><td class="fieldarea"><input type="text" name="datecreated" size="15" value="05/10/2010"></td><td class="fieldlabel">Valid Until</td><td class="fieldarea"><input type="text" name="validuntil" size="15" value="05/11/2010"></td></tr>
+</table>
+
+<p align="center"><input type="submit" value="Save Changes" class="button" /> <input type="button" value="Duplicate" class="button" onclick="window.location='quotes.php?action=duplicate&id='" disabled="true" /> <input type="button" value="Delete" class="button" onclick="doDelete('');" disabled="true" /> <input type="button" value="Download PDF" class="button" onclick="window.location='/admin/quotes.php?action=dlpdf&id=';" disabled="true" /> <input type="button" value="Email as PDF" class="button" onclick="window.location='quotes.php?action=sendpdf&id=';" disabled="true" /> <input type="button" value="Convert to Invoice" class="button" onclick="window.location='quotes.php?action=convert&id=';" disabled="true" /></p>
+
+<h2>Client Information</h2>
+
+<p><input type="radio" name="clienttype" value="existing" id="clienttypeexisting" /> Quote for existing client: <select name="userid"><option value="1">#1 - Demo Client</option>
+<option value="4">#4 - Test Test - test</option>
+</select> <br /><input type="radio" name="clienttype" value="new" id="clienttypenew" checked /> Quote for new client</p>
+
+<div id="newclientform">
+<table class="form" width="100%" border="0" cellspacing="2" cellpadding="3">
+<tr><td width="15%" class="fieldlabel">First Name</td><td class="fieldarea"><input type="text" name="firstname" size="30" value=""></td><td width="15%" class="fieldlabel">Address 1</td><td class="fieldarea"><input type="text" name="address1" size="30" value=""></td></tr>
+<tr><td class="fieldlabel">Last Name</td><td class="fieldarea"><input type="text" name="lastname" size="30" value=""></td><td class="fieldlabel">Address 2</td><td class="fieldarea"><input type="text" name="address2" size="30" value=""></td></tr>
+<tr><td class="fieldlabel">Company Name</td><td class="fieldarea"><input type="text" name="companyname" size="30" value=""></td><td class="fieldlabel">City</td><td class="fieldarea"><input type="text" name="city" size="30" value=""></td></tr>
+<tr><td class="fieldlabel">Email Address</td><td class="fieldarea"><input type="text" name="email" size="30" value=""></td><td class="fieldlabel">State</td><td class="fieldarea"><input type="text" name="state" size="30" value=""></td></tr>
+<tr><td class="fieldlabel">Phone Number</td><td class="fieldarea"><input type="text" name="phonenumber" size="30" value=""></td><td class="fieldlabel">Postcode</td><td class="fieldarea"><input type="text" name="postcode" size="30" value=""></td></tr>
+<tr><td class="fieldlabel">Currency</td><td class="fieldarea"><select name="currency"><option value="2">GBP</option><option value="1">USD</option></select></td><td class="fieldlabel">Country</td><td class="fieldarea"><select name="country"><option value="AF">Afghanistan</option><option value="AX">Aland Islands</option><option value="AL">Albania</option><option value="DZ">Algeria</option><option value="AS">American Samoa</option><option value="AD">Andorra</option><option value="AO">Angola</option><option value="AI">Anguilla</option><option value="AQ">Antarctica</option><option value="AG">Antigua And Barbuda</option><option value="AR">Argentina</option><option value="AM">Armenia</option><option value="AW">Aruba</option><option value="AU">Australia</option><option value="AT">Austria</option><option value="AZ">Azerbaijan</option><option value="BS">Bahamas</option><option value="BH">Bahrain</option><option value="BD">Bangladesh</option><option value="BB">Barbados</option><option value="BY">Belarus</option><option value="BE">Belgium</option><option value="BZ">Belize</option><option value="BJ">Benin</option><option value="BM">Bermuda</option><option value="BT">Bhutan</option><option value="BO">Bolivia</option><option value="BA">Bosnia And Herzegovina</option><option value="BW">Botswana</option><option value="BV">Bouvet Island</option><option value="BR">Brazil</option><option value="IO">British Indian Ocean Territory</option><option value="BN">Brunei Darussalam</option><option value="BG">Bulgaria</option><option value="BF">Burkina Faso</option><option value="BI">Burundi</option><option value="KH">Cambodia</option><option value="CM">Cameroon</option><option value="CA">Canada</option><option value="CV">Cape Verde</option><option value="KY">Cayman Islands</option><option value="CF">Central African Republic</option><option value="TD">Chad</option><option value="CL">Chile</option><option value="CN">China</option><option value="CX">Christmas Island</option><option value="CC">Cocos (Keeling) Islands</option><option value="CO">Colombia</option><option value="KM">Comoros</option><option value="CG">Congo</option><option value="CD">Congo, Democratic Republic</option><option value="CK">Cook Islands</option><option value="CR">Costa Rica</option><option value="CI">Cote D'Ivoire</option><option value="HR">Croatia</option><option value="CU">Cuba</option><option value="CY">Cyprus</option><option value="CZ">Czech Republic</option><option value="DK">Denmark</option><option value="DJ">Djibouti</option><option value="DM">Dominica</option><option value="DO">Dominican Republic</option><option value="EC">Ecuador</option><option value="EG">Egypt</option><option value="SV">El Salvador</option><option value="GQ">Equatorial Guinea</option><option value="ER">Eritrea</option><option value="EE">Estonia</option><option value="ET">Ethiopia</option><option value="FK">Falkland Islands (Malvinas)</option><option value="FO">Faroe Islands</option><option value="FJ">Fiji</option><option value="FI">Finland</option><option value="FR">France</option><option value="GF">French Guiana</option><option value="PF">French Polynesia</option><option value="TF">French Southern Territories</option><option value="GA">Gabon</option><option value="GM">Gambia</option><option value="GE">Georgia</option><option value="DE">Germany</option><option value="GH">Ghana</option><option value="GI">Gibraltar</option><option value="GR">Greece</option><option value="GL">Greenland</option><option value="GD">Grenada</option><option value="GP">Guadeloupe</option><option value="GU">Guam</option><option value="GT">Guatemala</option><option value="GG">Guernsey</option><option value="GN">Guinea</option><option value="GW">Guinea-Bissau</option><option value="GY">Guyana</option><option value="HT">Haiti</option><option value="HM">Heard Island & Mcdonald Islands</option><option value="VA">Holy See (Vatican City State)</option><option value="HN">Honduras</option><option value="HK">Hong Kong</option><option value="HU">Hungary</option><option value="IS">Iceland</option><option value="IN">India</option><option value="ID">Indonesia</option><option value="IR">Iran, Islamic Republic Of</option><option value="IQ">Iraq</option><option value="IE">Ireland</option><option value="IM">Isle Of Man</option><option value="IL">Israel</option><option value="IT">Italy</option><option value="JM">Jamaica</option><option value="JP">Japan</option><option value="JE">Jersey</option><option value="JO">Jordan</option><option value="KZ">Kazakhstan</option><option value="KE">Kenya</option><option value="KI">Kiribati</option><option value="KR">Korea</option><option value="KW">Kuwait</option><option value="KG">Kyrgyzstan</option><option value="LA">Lao People's Democratic Republic</option><option value="LV">Latvia</option><option value="LB">Lebanon</option><option value="LS">Lesotho</option><option value="LR">Liberia</option><option value="LY">Libyan Arab Jamahiriya</option><option value="LI">Liechtenstein</option><option value="LT">Lithuania</option><option value="LU">Luxembourg</option><option value="MO">Macao</option><option value="MK">Macedonia</option><option value="MG">Madagascar</option><option value="MW">Malawi</option><option value="MY">Malaysia</option><option value="MV">Maldives</option><option value="ML">Mali</option><option value="MT">Malta</option><option value="MH">Marshall Islands</option><option value="MQ">Martinique</option><option value="MR">Mauritania</option><option value="MU">Mauritius</option><option value="YT">Mayotte</option><option value="MX">Mexico</option><option value="FM">Micronesia, Federated States Of</option><option value="MD">Moldova</option><option value="MC">Monaco</option><option value="MN">Mongolia</option><option value="ME">Montenegro</option><option value="MS">Montserrat</option><option value="MA">Morocco</option><option value="MZ">Mozambique</option><option value="MM">Myanmar</option><option value="NA">Namibia</option><option value="NR">Nauru</option><option value="NP">Nepal</option><option value="NL">Netherlands</option><option value="AN">Netherlands Antilles</option><option value="NC">New Caledonia</option><option value="NZ">New Zealand</option><option value="NI">Nicaragua</option><option value="NE">Niger</option><option value="NG">Nigeria</option><option value="NU">Niue</option><option value="NF">Norfolk Island</option><option value="MP">Northern Mariana Islands</option><option value="NO">Norway</option><option value="OM">Oman</option><option value="PK">Pakistan</option><option value="PW">Palau</option><option value="PS">Palestinian Territory, Occupied</option><option value="PA">Panama</option><option value="PG">Papua New Guinea</option><option value="PY">Paraguay</option><option value="PE">Peru</option><option value="PH">Philippines</option><option value="PN">Pitcairn</option><option value="PL">Poland</option><option value="PT">Portugal</option><option value="PR">Puerto Rico</option><option value="QA">Qatar</option><option value="RE">Reunion</option><option value="RO">Romania</option><option value="RU">Russian Federation</option><option value="RW">Rwanda</option><option value="BL">Saint Barthelemy</option><option value="SH">Saint Helena</option><option value="KN">Saint Kitts And Nevis</option><option value="LC">Saint Lucia</option><option value="MF">Saint Martin</option><option value="PM">Saint Pierre And Miquelon</option><option value="VC">Saint Vincent And Grenadines</option><option value="WS">Samoa</option><option value="SM">San Marino</option><option value="ST">Sao Tome And Principe</option><option value="SA">Saudi Arabia</option><option value="SN">Senegal</option><option value="RS">Serbia</option><option value="SC">Seychelles</option><option value="SL">Sierra Leone</option><option value="SG">Singapore</option><option value="SK">Slovakia</option><option value="SI">Slovenia</option><option value="SB">Solomon Islands</option><option value="SO">Somalia</option><option value="ZA">South Africa</option><option value="GS">South Georgia And Sandwich Isl.</option><option value="ES">Spain</option><option value="LK">Sri Lanka</option><option value="SD">Sudan</option><option value="SR">Suriname</option><option value="SJ">Svalbard And Jan Mayen</option><option value="SZ">Swaziland</option><option value="SE">Sweden</option><option value="CH">Switzerland</option><option value="SY">Syrian Arab Republic</option><option value="TW">Taiwan</option><option value="TJ">Tajikistan</option><option value="TZ">Tanzania</option><option value="TH">Thailand</option><option value="TL">Timor-Leste</option><option value="TG">Togo</option><option value="TK">Tokelau</option><option value="TO">Tonga</option><option value="TT">Trinidad And Tobago</option><option value="TN">Tunisia</option><option value="TR">Turkey</option><option value="TM">Turkmenistan</option><option value="TC">Turks And Caicos Islands</option><option value="TV">Tuvalu</option><option value="UG">Uganda</option><option value="UA">Ukraine</option><option value="AE">United Arab Emirates</option><option value="GB">United Kingdom</option><option value="US" selected="selected">United States</option><option value="UM">United States Outlying Islands</option><option value="UY">Uruguay</option><option value="UZ">Uzbekistan</option><option value="VU">Vanuatu</option><option value="VE">Venezuela</option><option value="VN">Viet Nam</option><option value="VG">Virgin Islands, British</option><option value="VI">Virgin Islands, U.S.</option><option value="WF">Wallis And Futuna</option><option value="EH">Western Sahara</option><option value="YE">Yemen</option><option value="ZM">Zambia</option><option value="ZW">Zimbabwe</option></select></td></tr>
+</table>
+</div>
+
+<h2>Line Items</h2>
+
+<script type="text/javascript" src="../includes/jscript/jqueryag.js"></script>
+
+<table width=100% cellspacing=1 bgcolor="#cccccc" align=center><tr bgcolor="#efefef" style="text-align:center;font-weight:bold"><td width="50">Qty</td><td>Description</td><td width=90>Unit Price</td><td width=90>Discount %</td><td width=90>Total</td><td width=50>Taxed</td><td width=20></td></tr>
+<tr bgcolor=#ffffff style="text-align:center;"><td><input type="text" name="add_qty" size="4" value="0"></td><td><textarea name="add_desc" id="add_desc" class="expanding" style="width:98%"></textarea><br /><select id="addproduct" style="width:95%;"><option>Choose one or enter a custom description above...</option><option value="2">Hosting Packages - Advanced Package</option><option value="4">Dedicated Servers - Intel Dual Xeon 3Ghz</option><option value="1">Hosting Packages - Starter Package</option><option value="5">Web Design - Web Design Service</option></select></td><td><input type="text" name="add_up" id="add_up" size="10" value="0.00"></td><td><input type="text" name="add_discount" size="10" value="0.00"></td><td></td><td><input type="checkbox" name="add_taxable" value="1" /></td><td></td></tr>
+
+<tr bgcolor="#efefef" style="text-align:center;font-weight:bold"><td colspan="4" align="right">Sub Total:&nbsp;</td><td width=90>0</td><td></td><td></td></tr>
+<tr bgcolor="#efefef" style="text-align:center;font-weight:bold"><td colspan="4" align="right">Total Due:&nbsp;</td><td width=90>0</td><td></td><td></td></tr>
+
+</table>
+
+<h2>Notes</h2>
+
+<table class="form" width="100%" border="0" cellspacing="2" cellpadding="3">
+<tr><td width="15%" class="fieldlabel">Customer Notes</td><td class="fieldarea"><textarea name="customernotes" rows="5" style="width:100%"></textarea></td></tr>
+<tr><td class="fieldlabel">Admin Only Notes</td><td class="fieldarea"><textarea name="adminnotes" rows="5" style="width:100%"></textarea></td></tr>
+</table>
+
+<p align="center"><input type="submit" value="Save Changes" class="button" /> <input type="button" value="Duplicate" class="button" onclick="window.location='quotes.php?action=duplicate&id='" disabled="true" /> <input type="button" value="Delete" class="button" onclick="doDelete('');" disabled="true" /> <input type="button" value="Download PDF" class="button" onclick="window.location='/admin/quotes.php?action=dlpdf&id=';" disabled="true" /> <input type="button" value="Email as PDF" class="button" onclick="window.location='quotes.php?action=sendpdf&id=';" disabled="true" /> <input type="button" value="Convert to Invoice" class="button" onclick="window.location='quotes.php?action=convert&id=';" disabled="true" /></p>
+
+</form>
+
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<div id="footer">Copyright &copy; <a href="http://www.whmcs.com/" target="_blank">WHMCompleteSolution</a>.  All Rights Reserved.</div>
+</body>
+</html>

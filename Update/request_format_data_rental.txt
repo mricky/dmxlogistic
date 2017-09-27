@@ -1,0 +1,25 @@
+Data untuk rental : Boss datanya dibuat berdasarkan format :
+Data yang diperlukan 2013 - 2014 per bulan dan kumulatif pertahun :
+A. Financial :
+1. Revenue
+   a. Jumlah rental / penjualan
+   b. Jumlah komisi
+2. Fix Cost
+3. Variable Cost
+4. Gross Margin (Rev-fix cost - var cost)
+1. Operasional per kota
+   a. Avaibility
+   b. Yang dioperasionalkan
+   c. Yang Rusak
+   d. Mobil yang akan diremajakan
+   e. Prosesntase yang box
+2. Pool
+   a. Jumlah Pool
+   b. Jumlah kendaraan per pool
+   c. Jumlah yang box
+3. SDM
+   a. Karyawan Tetap
+   b. Karyawan Kontrak
+   c. Supir
+   d. Prosentase untuk marketing, operasional dan support
+   e. SDM pool dan workshop

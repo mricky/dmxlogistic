@@ -1,0 +1,16 @@
+index.php
+component/gudang/main - max page 20 record
+component/unitkerja/main - max page 20 record
+component/kontak/main - max page 20 record
+component/merkkendaraan/main - max page 20 record
+component/tipekendaraan/main - max page 20 record
+component/jeniskendaraan/main - max page 20 record
+component/barang/main - max page 20 recordomponent/barang/main - max page 20 record
+component/jenisservice/main - max page 20 record
+component/customerretail/main - menghilangkan field NPWP
+component/customercorporate/main - menghilangkan field Nama Pemohon
+component/sretail/add - hide data coa, jangan lupa emailomponent/sretail/add - hide data coa, jangan lupa email
+proses/sretail email notification
+include/kwitansi
+proses/kontrak 
+penambahan trigger, dan field di table gl_dkontrak

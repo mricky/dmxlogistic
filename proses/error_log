@@ -1,0 +1,6 @@
+[02-Aug-2013 06:57:19 Europe/Moscow] PHP Warning:  mysql_select_db() expects parameter 2 to be resource, null given in /home/folderba/public_html/rental/proses/sretail.php on line 30
+[02-Aug-2013 06:57:19 Europe/Moscow] PHP Warning:  mysql_query() expects parameter 2 to be resource, null given in /home/folderba/public_html/rental/proses/sretail.php on line 32
+[02-Aug-2013 07:13:47 Europe/Moscow] PHP Parse error:  syntax error, unexpected '}' in /home/folderba/public_html/rental/proses/sretail.php on line 76
+[02-Aug-2013 08:12:18 Europe/Moscow] PHP Parse error:  syntax error, unexpected T_DEFAULT in /home/folderba/public_html/rental/proses/sretail.php on line 94
+[02-Aug-2013 08:12:23 Europe/Moscow] PHP Parse error:  syntax error, unexpected T_DEFAULT in /home/folderba/public_html/rental/proses/sretail.php on line 94
+[02-Aug-2013 08:13:02 Europe/Moscow] PHP Parse error:  syntax error, unexpected $end in /home/folderba/public_html/rental/proses/sretail.php on line 138

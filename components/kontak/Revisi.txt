@@ -1,0 +1,11 @@
+Ada perubahan perhitungan untuk Modul Sales pada transaksi order Retail (sRetail). dimana perubahannya sbb;
+1) coba cek jam masih kurang tepat  jika lama sewa 24 jam pergantiannya harinya tidak berjalan
+2) Dasar perhitngan PPN adalah dari harga sewa kendarran
+3) Dasar perhitungan PPH adalah 2% dari harga sewa kendaraan
+4) Total biaya   adalah penjumlahan biaya-biaya ops
+5) Grand Total = PPN + PPH + Total Biaya + Deposit - Uang Muka
+
+Saya sudah menyiapakan design formnya tinggal mas wondo membetulkan codingnya untuk proses Add & Edit. Tambahkan aja field2 di databasenya yg dibutuhkan seperti PPH Deposit & Uang Muka. copykan source ini ke folder component
+
+Mohon ini diperioritaskan terlebih dahulu untuk dikerjakan secepatnya. jika informasi yg kurang jelas dapat ditanyakan kpd saya.
+Atas bantuanya saya ucapkan terima kasih

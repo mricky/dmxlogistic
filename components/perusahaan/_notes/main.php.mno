@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_ak_1" value="name:klasifikasi;datatype:string,name:id;datatype:string,name:akun;datatype:string" />
+	<infoitem key="UD_ak_6" value="name:klasifikasi;datatype:string,name:id;datatype:string,name:akun;datatype:string" />
+	<infoitem key="UD_ak_7" value="name:klasifikasi;datatype:string,name:id;datatype:string,name:akun;datatype:string" />
+	<infoitem key="UD_ak_2" value="name:klasifikasi;datatype:string,name:id;datatype:string,name:akun;datatype:string" />
+	<infoitem key="UD_ak_3" value="name:klasifikasi;datatype:string,name:id;datatype:string,name:akun;datatype:string" />
+	<infoitem key="UD_ak_4" value="name:klasifikasi;datatype:string,name:id;datatype:string,name:akun;datatype:string" />
+	<infoitem key="UD_ak_5" value="name:klasifikasi;datatype:string,name:id;datatype:string,name:akun;datatype:string" />
+</info>

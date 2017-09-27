@@ -1,0 +1,4 @@
+<div id="box-exportdata">
+<a href="javascript:window.print();"><img src="images/_print.png" border="0" /></a><br /><br />
+<a href="doc/laporancheckinoutexcel.php?query=<?php echo str_replace(" ","+",$query_data);?>&amp;query_checkinout=<?php echo str_replace(" ","+",$query_checkinout);?>&amp;mulai=<?php echo $mulai;?>&amp;akhir=<?php echo $akhir;?>&amp;files='LaporanChekinOutKendaraan'" title="Export Excel"><img src="images/_xls.png" border="0" /></a><br /><br /><a href="doc/laporancheckinoutdoc.php?query=<?php echo str_replace(" ","+",$query_data);?>&amp;query_checkinout=<?php echo str_replace(" ","+",$query_checkinout);?>&amp;mulai=<?php echo $mulai;?>&amp;akhir=<?php echo$akhir; ?>&amp;files='LaporanChekinOutKendaraan'" title="Export Word"><img src="images/_word.png" border="0" /></a>
+</div>

@@ -1,0 +1,5 @@
+<div id="box-exportdata">
+<!-- phasilsewa -- >
+<!--<a href="doc/laporanPenerimaanSewaPDF.php?query=<?php echo '';?>&amp;query_korporate='';?>&amp;cabang=<?php echo $cabang;?>&amp;mulai=<?php echo $mulai;?>&amp;akhir=<?php echo $akhir;?>&amp;cr_txt=<?php echo $_GET[cr_txt];?>" title="Export PDF"><img src="images/_print.png" border="0" /></a><br /><br />-->
+<a href="doc/laporansewaexcel.php?query=<?php echo '';?>&amp;query_korporate='';?>&amp;cabang=<?php echo $cabang;?>&amp;mulai=<?php echo $mulai;?>&amp;akhir=<?php echo $akhir;?>&amp;is_cop=<?php echo $is_cop;?>&amp;cr_txt=<?php echo $cr_txt;?>&amp;files='LaporanPenjualanSewaKendaraan'" title="Export Excel"><img src="images/_xls.png" border="0" /></a><br /><br /><!--<a href="doc/laporanphasilsewadoc.php?query='';?>&amp;query_korporate='';?>&amp;cabang=<?php echo $cabang;?>&amp;mulai=<?php echo $mulai;?>&amp;akhir=<?php echo$akhir; ?>&amp;files='LaporanPenerimaanHasilSewaKendaraan'" title="Export Word"><img src="images/_word.png" border="0" /></a>-->
+</div>

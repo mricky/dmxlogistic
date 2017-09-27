@@ -1,0 +1,41 @@
+query penjualan
+SELECT
+gl_retailtrans.tgl,
+gl_area.area,
+gl_gudang.gudang,
+gl_retailtrans.tujuan,
+gl_kontak.nama,
+gl_retailtrans.supir AS jasasurpir,
+gl_retailtrans.bbm AS bbm,
+gl_retailtrans.tol AS tol,
+gl_retailtrans.parkir AS parkir,
+gl_retailtrans.akomod AS akomodasi,
+gl_retailtrans.other as biayalainnya
+FROM
+gl_retailtrans
+INNER JOIN gl_area ON gl_area.id = gl_retailtrans.area
+INNER JOIN gl_gudang ON gl_gudang.id = gl_retailtrans.gudang
+INNER JOIN gl_kontak ON gl_kontak.id = gl_retailtrans.recipient
+order by gl_retailtrans.checkin desc
+
+
+query margin
+select no_ref,customer,kendaraan,checkin,angsuran, operasional, (angsuran - operasional) as margin from v_hasilsewaretail
+
+
+Query Avaibility
+SELECT
+gl_merkkendaraan.merk AS merk,
+gl_masterkendaraan.nopolisi AS nopolisi,
+gl_jeniskendaraan.jeniskendaraan AS jeniskendaraan,
+gl_tipekendaraan.tipekendaraan AS tipekendaraan,
+gl_masterkendaraan.tersedia as statusketersediaan, CASE gl_masterkendaraan.tersedia
+   when '0' then 'Not Ready for use'
+   when '1' then 'Ready for use'
+END as Avaibility
+from (((`gl_masterkendaraan` join `gl_merkkendaraan` on((`gl_merkkendaraan`.`id` = `gl_masterkendaraan`.`merk`))) join `gl_jeniskendaraan` on((`gl_jeniskendaraan`.`id` = `gl_masterkendaraan`.`jeniskendaraan`))) join `gl_tipekendaraan` on((`gl_tipekendaraan`.`id` = `gl_masterkendaraan`.`tipekendaraan`)))
+
+Query Karyawan
+select gl_kontak.nama, unit.unitkerja from gl_kontak inner JOIN gl_unitkerja unit on unit.id = gl_kontak.unitkerja
+WHERE
+gl_kontak.type = 'Karyawan'
